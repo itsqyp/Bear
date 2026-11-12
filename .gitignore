@@ -1,1 +1,39 @@
+# Dependencies
 node_modules/
+.pnpm-store/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+*.log
+logs/
+
+# Testing
+playwright-report/
+test-results/
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Local development
+arch.txt
+tech.txt
