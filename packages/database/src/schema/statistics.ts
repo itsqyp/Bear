@@ -1,6 +1,5 @@
 import {
   pgTable,
-  uuid,
   integer,
   bigint,
   timestamp,
@@ -8,11 +7,18 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { sql } from "drizzle-orm";
+import { text } from "drizzle-orm/pg-core";
+
+import { user } from "./auth.js";
 
 export const playerStatistics = pgTable(
   "player_statistics",
   {
-    userId: uuid("user_id").primaryKey(),
+    userId: text("user_id")
+      .primaryKey()
+      .references(() => user.id, {
+        onDelete: "cascade",
+      }),
 
     matchesPlayed: integer("matches_played").notNull().default(0),
 
