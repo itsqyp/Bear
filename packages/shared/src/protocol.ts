@@ -24,7 +24,7 @@ export interface PlayerInput {
 }
 
 export type ClientMessage =
-  | {
+| {
       type: "PING";
       timestamp: number;
     }
