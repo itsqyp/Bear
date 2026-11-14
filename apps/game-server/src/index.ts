@@ -1,5 +1,6 @@
 import { createServer } from "node:http";
 import { WebSocketServer } from "ws";
+import { PROTOCOL_VERSION } from "@bear/shared";
 
 const PORT = Number(process.env.PORT) || 3001;
 const HOST = process.env.HOST || "127.0.0.1";
@@ -56,7 +57,8 @@ websocketServer.on("connection", (socket) => {
   socket.send(
     JSON.stringify({
       type: "CONNECTION_ESTABLISHED",
-      message: "Connected to Bear Game Server",
+      protocolVersion: PROTOCOL_VERSION,
+      serverId: "local-game-server",
     }),
   );
 });
