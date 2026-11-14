@@ -2,6 +2,7 @@ import {
   pgTable,
   uuid,
   integer,
+  text,
   timestamp,
   primaryKey,
   index,
@@ -9,6 +10,7 @@ import {
 
 import { matches } from "./matches.js";
 import { bearSpecies } from "./bears.js";
+import { user } from "./auth.js";
 
 export const matchParticipants = pgTable(
   "match_participants",
@@ -19,10 +21,11 @@ export const matchParticipants = pgTable(
         onDelete: "cascade",
       }),
 
-    // References the authenticated account.
-    // I'll add its foreign-key constraint when I create
-    // the Better Auth user schema.
-    userId: uuid("user_id").notNull(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, {
+        onDelete: "restrict",
+      }),
 
     selectedBearSpeciesId: uuid("selected_bear_species_id")
       .notNull()
