@@ -1,7 +1,13 @@
-import { pgTable, uuid, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+
+import { user } from "./auth.js";
 
 export const playerProfiles = pgTable("player_profiles", {
-  userId: uuid("user_id").primaryKey(),
+  userId: text("user_id")
+    .primaryKey()
+    .references(() => user.id, {
+      onDelete: "cascade",
+    }),
 
   avatarAsset: text("avatar_asset"),
 
